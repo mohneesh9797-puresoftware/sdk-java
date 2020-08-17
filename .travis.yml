@@ -59,9 +59,9 @@ jobs:
       if: type != pull_request
       install: 
           - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
-              . ./install-jdk.sh --url "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-linux-amd64-20.1.0.tar.gz";
-            else
               . ./install-jdk.sh --url "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-linux-aarch64-20.1.0.tar.gz";
+            else
+              . ./install-jdk.sh --url "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-linux-amd64-20.1.0.tar.gz";
             fi  
       script: mvn clean verify -B
     - stage: deploy
