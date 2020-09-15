@@ -2,9 +2,14 @@ language: java
 
 before_install:
   - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
-     sudo apt-get install -y maven;
+        if [[ "${TRAVIS_JDK_VERSION}" == "openjdk8" ]]; then
+            sudo apt-get install -y maven openjdk-8-jdk;
+        else
+            sudo apt-get install -y maven;
+        fi
     fi
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+
 cache:
   directories:
     - ".autoconf"
@@ -29,11 +34,6 @@ jobs:
       name: "OpenJDK 8"
       dist: bionic
       jdk: openjdk8
-      before_install:
-      - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
-          sudo apt-get install -y maven openjdk-8-jdk;
-        fi
-      - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
       script: mvn clean verify -B
     - name: "OpenJDK 11"
       jdk: openjdk11
