@@ -27,6 +27,7 @@ jobs:
     - stage: test
       arch: arm64
       name: "OpenJDK 8"
+      dist: bionic
       jdk: openjdk8
       before_install:
       - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
@@ -39,6 +40,7 @@ jobs:
       script: mvn clean verify -B
     - name: "OpenJDK 11"
       arch: arm64
+      dist': bionic
       jdk: openjdk11
       script: mvn clean verify -B
    # GraalVM
