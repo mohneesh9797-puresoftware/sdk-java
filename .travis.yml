@@ -57,7 +57,7 @@ jobs:
       dist: bionic 
       if: type != pull_request
       install: . ./install-jdk.sh --url "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-aarch64-20.2.0.tar.gz"
-      script: mvn clean verify -B
+      script: mvn clean install -B
     - stage: deploy
       if: type != pull_request
       name: Deploy to Maven Repository
