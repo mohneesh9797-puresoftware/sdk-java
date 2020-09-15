@@ -1,8 +1,10 @@
 language: java
 
 before_install:
+  - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
+     sudo apt-get install -y maven;
+    fi
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-
 cache:
   directories:
     - ".autoconf"
@@ -22,10 +24,24 @@ jobs:
       name: "OpenJDK 8"
       jdk: openjdk8
       script: mvn clean verify -B
+    - stage: test
+      arch: arm64
+      name: "OpenJDK 8"
+      jdk: openjdk8
+      before_install:
+      - if [[ "${TRAVIS_CPU_ARCH}" == "arm64" ]]; then
+          sudo apt-get install -y maven openjdk-8-jdk;
+        fi
+      - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+      script: mvn clean verify -B
     - name: "OpenJDK 11"
       jdk: openjdk11
       script: mvn clean verify -B
-    # GraalVM
+    - name: "OpenJDK 11"
+      arch: arm64
+      jdk: openjdk11
+      script: mvn clean verify -B
+   # GraalVM
     - name: "GraalVM 20.1.0 (8)"
       if: type != pull_request
       install: . ./install-jdk.sh --url "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java8-linux-amd64-20.1.0.tar.gz"
