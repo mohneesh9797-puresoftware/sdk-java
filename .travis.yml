@@ -22,8 +22,7 @@ jobs:
       name: "OpenJDK 8"
       jdk: openjdk8
       script: mvn clean verify -B
-    - stage: test
-      arch: arm64
+    - arch: arm64
       name: "OpenJDK 8"
       dist: xenail
       addons:
@@ -35,8 +34,8 @@ jobs:
       jdk: openjdk11
       script: mvn clean verify -B
     - name: "OpenJDK 11"
-      arch: xenail
-      dist': bionic
+      arch: arm64
+      dist': xenail
       jdk: openjdk11
       script: ./mvnw clean verify -B
    # GraalVM
